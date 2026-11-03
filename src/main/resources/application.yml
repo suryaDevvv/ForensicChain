@@ -1,0 +1,31 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  profiles:
+    default: dev
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/evidencechain}
+    username: ${DB_USERNAME:evidencechain}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+
+server:
+  error:
+    include-message: never
+
+evidencechain:
+  jwt:
+    secret-base64: ${JWT_SECRET_BASE64:}
+    expiration-seconds: ${JWT_EXPIRATION_SECONDS:3600}
+  bootstrap-admin:
+    username: ${BOOTSTRAP_ADMIN_USERNAME:}
+    password: ${BOOTSTRAP_ADMIN_PASSWORD:}
